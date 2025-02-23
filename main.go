@@ -12,7 +12,7 @@ type DataResponse struct {
 	IsError bool        `json:"err"`
 }
 
-func SuccessResponse(c *gin.Context, data interface{}, message string) {
+func OkResponse(c *gin.Context, data interface{}, message string) {
 	c.JSON(http.StatusOK, DataResponse{
 		Message: message,
 		Data:    data,
@@ -20,8 +20,22 @@ func SuccessResponse(c *gin.Context, data interface{}, message string) {
 	})
 }
 
-func ErrorResponse(c *gin.Context, message string, code int) {
-	c.JSON(code, DataResponse{
+func ServerErrorResponse(c *gin.Context, message string) {
+	c.JSON(http.StatusInternalServerError, DataResponse{
+		Message: message,
+		IsError: true,
+	})
+}
+
+func BadRequestResponse(c *gin.Context, message string) {
+	c.JSON(http.StatusBadRequest, DataResponse{
+		Message: message,
+		IsError: true,
+	})
+}
+
+func Error404Response(c *gin.Context, message string) {
+	c.JSON(http.StatusNotFound, DataResponse{
 		Message: message,
 		IsError: true,
 	})
