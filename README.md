@@ -2,6 +2,9 @@
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/aro-wolo/goresp.svg)](https://pkg.go.dev/github.com/aro-wolo/goresp)
 [![Go Report Card](https://goreportcard.com/badge/github.com/aro-wolo/goresp)](https://goreportcard.com/report/github.com/aro-wolo/goresp)
+[![Go Test](https://github.com/aro-wolo/goresp/actions/workflows/test.yml/badge.svg)](https://github.com/aro-wolo/goresp/actions/workflows/test.yml)
+[![Coverage Status](https://coveralls.io/repos/github/aro-wolo/goresp/badge.svg?branch=main)](https://coveralls.io/github/aro-wolo/goresp?branch=main)
+
 
 **goresp** is a lightweight Go library for handling standardized API responses using Gin.
 
