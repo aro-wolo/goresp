@@ -41,6 +41,13 @@ func Error404Response(c *gin.Context, message string) {
 	})
 }
 
+func AccessDeniedResponse(c *gin.Context, message string) {
+	c.JSON(http.StatusUnauthorized, DataResponse{
+		Message: message,
+		IsError: true,
+	})
+}
+
 func JSONResp(c *gin.Context, code int, message string, data interface{}, isError bool) {
 	c.JSON(code, DataResponse{
 		Message: message,
