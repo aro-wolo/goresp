@@ -21,7 +21,7 @@ import "github.com/aro-wolo/goresp"
 
 ## Usage
 
-goresp provides three main functions to simplify API responses:
+goresp provides functions to simplify API responses:
 
 ### 1. Success Response
 
@@ -66,6 +66,25 @@ Use `JSONResp` for full control over the response:
 func customHandler(c *gin.Context) {
 	data := map[string]string{"error": "Unauthorized access"}
 	goresp.JSONResp(c, http.StatusUnauthorized, "Access denied", data, true)
+}
+```
+
+### 4. ShouldBind with Automatic Error Handling
+
+Use `ShouldBind` to automatically bind JSON request bodies and return a bad request response if binding fails:
+
+```go
+func createUserHandler(c *gin.Context) {
+	var user struct {
+		Name  string `json:"name" binding:"required"`
+		Email string `json:"email" binding:"required,email"`
+	}
+
+	if err := goresp.ShouldBind(c, &user); err != nil {
+		return
+	}
+
+	goresp.SuccessResponse(c, user, "User created successfully")
 }
 ```
 

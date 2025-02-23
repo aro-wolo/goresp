@@ -48,3 +48,12 @@ func JSONResp(c *gin.Context, code int, message string, data interface{}, isErro
 		IsError: isError,
 	})
 }
+
+// ShouldBindJSON is a helper function that binds JSON and returns an error response if binding fails
+func ShouldBindJSON(c *gin.Context, obj interface{}) bool {
+	if err := c.ShouldBindJSON(obj); err != nil {
+		BadRequestResponse(c, "Invalid request payload")
+		return false
+	}
+	return true
+}
