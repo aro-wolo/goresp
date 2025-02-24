@@ -5,43 +5,49 @@
 [![Go Test](https://github.com/aro-wolo/goresp/actions/workflows/test.yml/badge.svg)](https://github.com/aro-wolo/goresp/actions/workflows/test.yml)
 [![Coverage Status](https://coveralls.io/repos/github/aro-wolo/goresp/badge.svg?branch=main)](https://coveralls.io/github/aro-wolo/goresp?branch=main)
 
-
-**goresp** is a lightweight Go library for handling standardized API responses using Gin.
+**goresp** is a lightweight Go library for handling standardized API responses using the Gin framework.
 
 ## Installation
 
-To install goresp, use:
+Install `goresp` using:
 
 ```sh
 go get github.com/aro-wolo/goresp
 ```
 
-Then import it in your project:
+Then import it into your project:
 
 ```go
 import "github.com/aro-wolo/goresp"
 ```
 
+## Features
+
+- Standardized JSON response format
+- Predefined response methods for common HTTP statuses
+- Easy JSON request binding with validation handling
+- Customizable responses with flexible JSON formatting
+
 ## Usage
 
-goresp provides functions to simplify API responses:
+goresp simplifies API response handling with predefined functions.
 
-### 1. Success Response
+### 1. Standard Success Response
 
-Use `SuccessResponse` to send a standard success response:
+Use `Ok` to send a successful response:
 
 ```go
 package main
 
 import (
-	"net/http"
 	"github.com/gin-gonic/gin"
 	"github.com/aro-wolo/goresp"
 )
 
 func handler(c *gin.Context) {
+	res := goresp.New(c)
 	data := map[string]string{"message": "Hello, World!"}
-	goresp.SuccessResponse(c, data, "Request successful")
+	res.Ok(data, "Request successful")
 }
 
 func main() {
@@ -51,30 +57,39 @@ func main() {
 }
 ```
 
-### 2. Error Response
+### 2. Standard Error Responses
 
-Use `ErrorResponse` to return an error response with a status code:
-
+#### Bad Request
 ```go
-func errorHandler(c *gin.Context) {
-	goresp.ErrorResponse(c, "Invalid request", http.StatusBadRequest)
-}
+res.BadRequest("Invalid request data")
+```
+
+#### Unauthorized
+```go
+res.AccessDenied("Unauthorized access")
+```
+
+#### Not Found
+```go
+res.Error404("Resource not found")
+```
+
+#### Internal Server Error
+```go
+res.ServerError("Internal server error")
 ```
 
 ### 3. Custom Response
 
-Use `JSONResp` for full control over the response:
+Use `JSON` for full control over the response:
 
 ```go
-func customHandler(c *gin.Context) {
-	data := map[string]string{"error": "Unauthorized access"}
-	goresp.JSONResp(c, http.StatusUnauthorized, "Access denied", data, true)
-}
+res.JSON(418, "I'm a teapot", nil, true)
 ```
 
-### 4. ShouldBind with Automatic Error Handling
+### 4. Request Binding with Automatic Error Handling
 
-Use `ShouldBind` to automatically bind JSON request bodies and return a bad request response if binding fails:
+Use `ShouldBind` to automatically bind JSON request bodies and handle errors:
 
 ```go
 func createUserHandler(c *gin.Context) {
@@ -83,11 +98,12 @@ func createUserHandler(c *gin.Context) {
 		Email string `json:"email" binding:"required,email"`
 	}
 
-	if err := goresp.ShouldBind(c, &user); err != nil {
+	res := goresp.New(c)
+	if !res.ShouldBind(&user) {
 		return
 	}
 
-	goresp.SuccessResponse(c, user, "User created successfully")
+	res.Ok(user, "User created successfully")
 }
 ```
 
