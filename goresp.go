@@ -36,7 +36,6 @@ func (r *Responder) Created(data interface{}, message string) {
 	})
 }
 
-
 func (r *Responder) ServerError(message string) {
 	r.ctx.JSON(http.StatusInternalServerError, DataResponse{
 		Message: message,
@@ -58,11 +57,14 @@ func (r *Responder) Error404(message string) {
 	})
 }
 
+// AccessDenied sends a 401 Unauthorized response and abort the request
 func (r *Responder) AccessDenied(message string) {
 	r.ctx.JSON(http.StatusUnauthorized, DataResponse{
 		Message: message,
 		IsError: true,
 	})
+
+	r.ctx.Abort()
 }
 
 func (r *Responder) Forbidden(message string) {
