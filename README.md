@@ -1,9 +1,14 @@
-# goresp
+# goresp Go API Response 
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/aro-wolo/goresp.svg)](https://pkg.go.dev/github.com/aro-wolo/goresp)
+![GitHub Repo stars](https://img.shields.io/github/stars/aro-wolo/goresp?style=social)
+![GitHub last commit](https://img.shields.io/github/last-commit/aro-wolo/goresp)
+![GitHub issues](https://img.shields.io/github/issues/aro-wolo/goresp)
+![GitHub contributors](https://img.shields.io/github/contributors/aro-wolo/goresp)
 [![Go Report Card](https://goreportcard.com/badge/github.com/aro-wolo/goresp)](https://goreportcard.com/report/github.com/aro-wolo/goresp)
-[![Go Test](https://github.com/aro-wolo/goresp/actions/workflows/test.yml/badge.svg)](https://github.com/aro-wolo/goresp/actions/workflows/test.yml)
-[![Coverage Status](https://coveralls.io/repos/github/aro-wolo/goresp/badge.svg?branch=main)](https://coveralls.io/github/aro-wolo/goresp?branch=main)
+[![Build Status](https://github.com/aro-wolo/goresp/actions/workflows/go.yml/badge.svg)](https://github.com/aro-wolo/goresp/actions)
+[![codecov](https://codecov.io/gh/aro-wolo/goresp/branch/main/graph/badge.svg)](https://codecov.io/gh/aro-wolo/goresp)
+![Go Module](https://img.shields.io/github/go-mod/go-version/aro-wolo/goresp)
+[![License](https://img.shields.io/github/license/aro-wolo/goresp.svg)](https://github.com/aro-wolo/goresp/blob/main/LICENSE)
 
 **goresp** is a lightweight Go library for handling standardized API responses using the Gin framework.
 
