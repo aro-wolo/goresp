@@ -9,6 +9,7 @@
 [![codecov](https://codecov.io/gh/aro-wolo/goresp/branch/main/graph/badge.svg)](https://codecov.io/gh/aro-wolo/goresp)
 ![Go Module](https://img.shields.io/github/go-mod/go-version/aro-wolo/goresp)
 [![License](https://img.shields.io/github/license/aro-wolo/goresp.svg)](https://github.com/aro-wolo/goresp/blob/main/LICENSE)
+[![wakatime](https://wakatime.com/badge/user/c78c31fe-9c97-4b21-b865-91bc182f2d42.svg)](https://wakatime.com/@c78c31fe-9c97-4b21-b865-91bc182f2d42)
 
 **goresp** is a lightweight Go library for handling standardized API responses using the Gin framework.
 
