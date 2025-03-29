@@ -109,9 +109,15 @@ func (r *Responder) JSON(code int, message string, data interface{}, isError boo
 	})
 }
 
-func (r *Responder) ShouldBind(obj interface{}) bool {
+func (r *Responder) ShouldBind(obj interface{}, customErr ...string) bool {
 	if err := r.ctx.ShouldBindJSON(obj); err != nil {
-		r.BadRequest("Invalid request payload")
+		message := "Invalid request payload: " + err.Error()
+
+		if len(customErr) > 0 {
+			message = customErr[0]
+		}
+
+		r.BadRequest(message)
 		return false
 	}
 	return true
