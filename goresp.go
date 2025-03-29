@@ -59,6 +59,10 @@ func (r *Responder) Error404(messages ...string) {
 	r.sendJSON(http.StatusNotFound, "Not Found", true, nil, messages...)
 }
 
+func (r *Responder) NotFound(messages ...string) {
+	r.sendJSON(http.StatusNotFound, "Not Found", true, nil, messages...)
+}
+
 func (r *Responder) Forbidden(messages ...string) {
 	r.sendJSON(http.StatusForbidden, "Forbidden", true, nil, messages...)
 }
