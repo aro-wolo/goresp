@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	"github.com/gin-gonic/gin"
@@ -172,14 +173,17 @@ func TestResponder_JSON(t *testing.T) {
 func TestResponder_ShouldBind_Success(t *testing.T) {
 	_, w, res := setupTest()
 
-	res.ctx.Request = httptest.NewRequest(http.MethodPost, "/", nil)
-	res.ctx.Request.Header.Set("Content-Type", "application/json")
+	// Provide a valid JSON request body
+	reqBody := `{"key":"value"}`
+	req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(reqBody))
+	req.Header.Set("Content-Type", "application/json")
+	res.ctx.Request = req
 
 	var obj map[string]string
 	success := res.ShouldBind(&obj)
 
-	assert.True(t, success)
-	assert.Equal(t, http.StatusOK, w.Code)
+	assert.True(t, success, "Expected ShouldBind to return true")
+	assert.Equal(t, http.StatusOK, w.Code, "Expected HTTP 200 but got %d", w.Code)
 }
 
 // Test ShouldBind with Invalid JSON
