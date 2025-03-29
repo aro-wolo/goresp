@@ -76,7 +76,22 @@ func (r *Responder) AccessDenied(messages ...string) {
 	r.ctx.Abort()
 }
 
-// JSON response with custom status code
+func (r *Responder) NotAllowed(messages ...string) {
+	r.sendJSON(http.StatusMethodNotAllowed, "Method Not Allowed", true, nil, messages...)
+}
+
+func (r *Responder) NotAcceptable(messages ...string) {
+	r.sendJSON(http.StatusNotAcceptable, "Not Acceptable", true, nil, messages...)
+}
+
+func (r *Responder) UnsupportedMedia(messages ...string) {
+	r.sendJSON(http.StatusUnsupportedMediaType, "Unsupported Media Type", true, nil, messages...)
+}
+
+func (r *Responder) ReqTimeout(messages ...string) {
+	r.sendJSON(http.StatusRequestTimeout, "Request Timeout", true, nil, messages...)
+}
+
 func (r *Responder) JSON(code int, message string, data interface{}, isError bool) {
 	r.sendJSON(code, message, isError, data)
 }
