@@ -20,7 +20,13 @@ func New(c *gin.Context) *Responder {
 	return &Responder{ctx: c}
 }
 
-func (r *Responder) Ok(data interface{}, message string) {
+func (r *Responder) Ok(data interface{}, messages ...string) {
+	message := ""
+
+	if len(messages) > 0 {
+		message = messages[0]
+	}
+
 	r.ctx.JSON(http.StatusOK, DataResponse{
 		Message: message,
 		Data:    data,
